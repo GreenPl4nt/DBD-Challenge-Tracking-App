@@ -29,5 +29,3 @@ def survivor_list():
         list.append(key)
     return list
 
-print(survivor_list())
-
