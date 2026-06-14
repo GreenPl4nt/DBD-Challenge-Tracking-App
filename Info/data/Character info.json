@@ -43,7 +43,7 @@
         "First": ["Turn Back The Clock", "Secret Project", "Hex: Hive Mind"],
         "General Killer Perks": ["Bitter Murmur", "Deerstalker", "Distressing", "Hex: No One Escapes Death", "Hex: Thrill Of The Hunt", "Insidious", "Iron Grasp", "Scourge Hook: Monstrous Shrine", "Shattered Hope", "Sloppy Butcher", "Spies From The Shadows", "Unrelenting", "Whispers", "No Holds Barred", "Hex: Fortune's Fool", "Scourge Hook: Weeping Wounds"]
     },
-    "Survivor":{
+    "Survivors":{
         "Dwight Fairfield": ["Bond", "Leader", "Prove Thyself"],
         "Meg Thomas": ["Adrenaline", "Quick & Quiet", "Sprint Burst"],
         "Claudette Morel": ["Botany Knowledge", "Empathy", "Self-Care"],
