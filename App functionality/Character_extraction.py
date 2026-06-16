@@ -8,7 +8,7 @@ with open("./Info/data/Character info.json", "r", encoding="utf-8") as file:
 #Opening exactly the whole Killer and perk list or the individual Killer names
 
 def killers():
-    killers = data["Killer"]
+    killers = data["Killers"]
     return killers
 
 def killer_list():

@@ -1,6 +1,7 @@
 import customtkinter
 from PIL import Image
 
+#Creates an image, might make it so that the images scale with the window size
 
 def extract_images(path:str,clist:list):
     img_dict = {}
