@@ -1,7 +1,8 @@
 import customtkinter
 import Character_extraction as ce
 import Image_extraction as ie
-
+import Save_state_manipulation as ssm
+import Button_functionality as bf
 
 #Complete sintetized functionality of frame for Killers and Survivors
 
@@ -14,22 +15,74 @@ class FunctionalGrid(customtkinter.CTkScrollableFrame):
         self.character = characters
         cleaned_names = [characters.replace('"','') for characters in characters]
         self.character_images = ie.extract_images(f"./Info/assets/Character assets/{character_name}",cleaned_names)
+        self.icons = ie.other_images(f"./Info/assets/icons/")
+        self.save_state = ssm.check_character_state(character_name,"test save file")
         self.labels = []
+        self.buttons_dict = {}
 
         column = 0
         row = 0
 
         for i in self.character[:-1]:
+
+            cleaned_name = i.replace('"','')
+
             if self.character_name == "Killers":
                 char_label = customtkinter.CTkLabel(self, text=f"The {i}")
-            else:
+                if self.save_state[i] == 0:
+                    char_button = customtkinter.CTkButton(self, 
+                                                          image=self.character_images[cleaned_name], 
+                                                          text="", 
+                                                          fg_color="transparent",
+                                                          command=lambda cn=i, on_img=self.character_images[cleaned_name], off_img=self.icons["dead survivor"]: bf.switch_image(self.buttons_dict[cn],
+                                                                                  self.character_name,
+                                                                                  "test save file",
+                                                                                  cn,
+                                                                                  on_img,
+                                                                                  off_img))
+                elif self.save_state[i] == 1:
+                    char_button = customtkinter.CTkButton(self,
+                                                          image=self.icons["dead survivor"],
+                                                          text="", 
+                                                          fg_color="transparent",
+                                                          command=lambda cn=i, on_img=self.character_images[cleaned_name], off_img=self.icons["dead survivor"]: bf.switch_image(self.buttons_dict[cn],
+                                                                                  self.character_name,
+                                                                                  "test save file",
+                                                                                  cn,
+                                                                                  on_img,
+                                                                                  off_img))
+
+            elif self.character_name == "Survivors":
                 char_label = customtkinter.CTkLabel(self, text=i, font=self.font)
-            cleaned_name = i.replace('"','')
-            char_button = customtkinter.CTkButton(self, image=self.character_images[cleaned_name], text="", fg_color="transparent")
-            print(char_button)
+                if self.save_state[i] == 0:
+                    char_button = customtkinter.CTkButton(self, 
+                                                          image=self.character_images[cleaned_name], 
+                                                          text="", 
+                                                          fg_color="transparent",
+                                                          command=lambda cn=i, on_img=self.character_images[cleaned_name], off_img=self.icons["dead survivor"]: bf.switch_image(self.buttons_dict[cn],
+                                                                                  self.character_name,
+                                                                                  "test save file",
+                                                                                  cn,
+                                                                                  on_img,
+                                                                                  off_img))
+                elif self.save_state[i] == 1:
+                    char_button = customtkinter.CTkButton(self,
+                                                          image=self.icons["dead survivor"],
+                                                          text="", 
+                                                          fg_color="transparent",
+                                                          command=lambda cn=i, on_img=self.character_images[cleaned_name], off_img=self.icons["dead survivor"]: bf.switch_image(self.buttons_dict[cn],
+                                                                                  self.character_name,
+                                                                                  "test save file",
+                                                                                  cn,
+                                                                                  on_img,
+                                                                                  off_img))
+      
             char_button.grid(row=row+1, column=column, padx= 10, pady= (0,10))
             char_label.grid(row=row, column=column, padx= 10, pady= (0,10))
             
+            char_button.image = self.character_images[cleaned_name]
+            self.buttons_dict[i] = char_button
+
             if column == 3:
                 row += 2
                 column = 0
