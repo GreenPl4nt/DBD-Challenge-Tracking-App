@@ -3,13 +3,13 @@ import Character_extraction as ce
 import Image_extraction as ie
 
 
-print()
 #Complete sintetized functionality of frame for Killers and Survivors
 
 class FunctionalGrid(customtkinter.CTkScrollableFrame):
     def __init__(self, master, characters:list, character_name:str):
         super().__init__(master)
-        self.font = customtkinter.CTkFont(family="Roboto", size=20)
+
+        self.font = customtkinter.CTkFont(family="Roboto", size=15, weight="bold")
         self.character_name = character_name
         self.character = characters
         cleaned_names = [characters.replace('"','') for characters in characters]
@@ -26,6 +26,7 @@ class FunctionalGrid(customtkinter.CTkScrollableFrame):
                 char_label = customtkinter.CTkLabel(self, text=i, font=self.font)
             cleaned_name = i.replace('"','')
             char_button = customtkinter.CTkButton(self, image=self.character_images[cleaned_name], text="", fg_color="transparent")
+            print(char_button)
             char_button.grid(row=row+1, column=column, padx= 10, pady= (0,10))
             char_label.grid(row=row, column=column, padx= 10, pady= (0,10))
             
