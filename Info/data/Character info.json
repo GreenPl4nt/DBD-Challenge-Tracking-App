@@ -41,6 +41,7 @@
         "Animatronic": ["Help Wanted", "Phantom Fear", "Haywire"],
         "Krasue": ["Ravenous", "Wandering Eye", "Hex: Overture Of Doom"],
         "First": ["Turn Back The Clock", "Secret Project", "Hex: Hive Mind"],
+        "Slasher":["Hex: Scared To Death", "Silent Shadow", "Rampage"],
         "General Killer Perks": ["Bitter Murmur", "Deerstalker", "Distressing", "Hex: No One Escapes Death", "Hex: Thrill Of The Hunt", "Insidious", "Iron Grasp", "Scourge Hook: Monstrous Shrine", "Shattered Hope", "Sloppy Butcher", "Spies From The Shadows", "Unrelenting", "Whispers", "No Holds Barred", "Hex: Fortune's Fool", "Scourge Hook: Weeping Wounds"]
     },
     "Survivors":{
@@ -49,7 +50,7 @@
         "Claudette Morel": ["Botany Knowledge", "Empathy", "Self-Care"],
         "Jake Park": ["Calm Spirit", "Iron Will", "Saboteur"],
         "Nea Karlsson": ["Balanced Landing", "Urban Evassion", "Streetwise"],
-        "William Bill Overbeck": ["Borrowed Time", "Unbreakable", "Left Behind"],
+        "William \"Bill\" Overbeck": ["Borrowed Time", "Unbreakable", "Left Behind"],
         "Laurie Strode": ["Sole Survivor", "Decisive Strike", "Object Of Obsession"],
         "Ace Visconti": ["Ace In The Hole", "Open-Handed", "Up The Ante"],
         "Feng Min": ["Technician", "Lithe", "Alert"],

@@ -3,15 +3,17 @@ import Character_extraction as ce
 import Image_extraction as ie
 
 
-
+print()
 #Complete sintetized functionality of frame for Killers and Survivors
 
 class FunctionalGrid(customtkinter.CTkScrollableFrame):
-    def __init__(self, master, character:str, character_name:str):
+    def __init__(self, master, characters:list, character_name:str):
         super().__init__(master)
+        self.font = customtkinter.CTkFont(family="Roboto", size=20)
         self.character_name = character_name
-        self.character = character
-        self.character_images = ie.extract_images(f"./Info/assets/Character assets/{character_name}",self.character)
+        self.character = characters
+        cleaned_names = [characters.replace('"','') for characters in characters]
+        self.character_images = ie.extract_images(f"./Info/assets/Character assets/{character_name}",cleaned_names)
         self.labels = []
 
         column = 0
@@ -21,10 +23,9 @@ class FunctionalGrid(customtkinter.CTkScrollableFrame):
             if self.character_name == "Killers":
                 char_label = customtkinter.CTkLabel(self, text=f"The {i}")
             else:
-                char_label = customtkinter.CTkLabel(self, text=i)
-
-            tem_label = i.replace('"','')
-            char_button = customtkinter.CTkButton(self, image=self.character_images[tem_label], text="", fg_color="transparent")
+                char_label = customtkinter.CTkLabel(self, text=i, font=self.font)
+            cleaned_name = i.replace('"','')
+            char_button = customtkinter.CTkButton(self, image=self.character_images[cleaned_name], text="", fg_color="transparent")
             char_button.grid(row=row+1, column=column, padx= 10, pady= (0,10))
             char_label.grid(row=row, column=column, padx= 10, pady= (0,10))
             
@@ -41,8 +42,8 @@ class FunctionalGrid(customtkinter.CTkScrollableFrame):
 class MainMenu(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
-        killerbutton = customtkinter.CTkButton(self, text="killers", command= lambda: master.switch_window(FunctionalGrid(master, character=ce.killer_list(), character_name="Killers")))
-        survivorbutton = customtkinter.CTkButton(self, text="survivors", command= lambda: master.switch_window(FunctionalGrid(master, character=ce.survivor_list(), character_name="Survivors")))
+        killerbutton = customtkinter.CTkButton(self, text="killers", command= lambda: master.switch_window(FunctionalGrid(master, characters=ce.killer_list(), character_name="Killers")))
+        survivorbutton = customtkinter.CTkButton(self, text="survivors", command= lambda: master.switch_window(FunctionalGrid(master, characters=ce.survivor_list(), character_name="Survivors")))
 
         killerbutton.grid(row=1,column=1, padx= 10, pady= (0,10))
         survivorbutton.grid(row=1,column=2, padx= 10, pady= (0,10))
