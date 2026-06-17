@@ -5,9 +5,9 @@ import json
 def save_file_creation(character_type:str, save_name:str):
     character_dict = {}
 
-    if character_type == "Killer":
+    if character_type == "Killers":
         character_list = ce.killer_list()
-    elif character_type == "Survivor":
+    elif character_type == "Survivors":
         character_list = ce.survivor_list()
     
     for i in character_list[:-1]:
@@ -35,3 +35,4 @@ def check_character_state(char_type:str,save_name:str):
         data = json.load(file)
     return data
 
+save_file_creation("Killers","third save file")

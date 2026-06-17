@@ -25,7 +25,10 @@ class FunctionalGrid(customtkinter.CTkScrollableFrame):
 
         for i in self.character[:-1]:
 
+            self.grid_columnconfigure(column, weight=1)
             cleaned_name = i.replace('"','')
+
+            #Button functionality for Killers
 
             if self.character_name == "Killers":
                 char_label = customtkinter.CTkLabel(self, text=f"The {i}")
@@ -51,6 +54,8 @@ class FunctionalGrid(customtkinter.CTkScrollableFrame):
                                                                                   cn,
                                                                                   on_img,
                                                                                   off_img))
+            
+            #Button functionality for survivors
 
             elif self.character_name == "Survivors":
                 char_label = customtkinter.CTkLabel(self, text=i, font=self.font)
