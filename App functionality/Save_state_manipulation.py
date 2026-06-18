@@ -35,4 +35,3 @@ def check_character_state(char_type:str,save_name:str):
         data = json.load(file)
     return data
 
-save_file_creation("Killers","third save file")
