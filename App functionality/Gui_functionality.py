@@ -171,7 +171,7 @@ class MainApp(customtkinter.CTk):
     def __init__(self, app_version):
         super().__init__()
         self.version = app_version
-        self.title(f"DBD-Challenge-Tracking-App - V-{self.version}")
+        self.title(f"DBD-Challenge-Tracking-App - {self.version}")
         self.geometry("900x500")
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)

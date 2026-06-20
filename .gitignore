@@ -1,0 +1,19 @@
+#python cache
+/App functionality/ __pycache__/
+*.pyc
+*.pyo
+
+#pyinstaller build outputs
+build/
+dist/
+*.spec
+
+#Virtual enviroments
+.venv/
+.env/
+
+# IDE folders (optional)
+.vscode/
+.idea/
+
+requirements.txt
