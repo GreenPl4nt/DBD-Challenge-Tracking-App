@@ -2,7 +2,8 @@ import customtkinter
 import Character_extraction as ce
 import Image_extraction as ie
 import Save_state_manipulation as ssm
-import Button_functionality as bf
+import button_functionality as bf
+import Update_functionality as uf
 from pathlib import Path
 
 #Complete sintetized functionality of frame for Killers and Survivors
@@ -15,7 +16,7 @@ class FunctionalGrid(customtkinter.CTkScrollableFrame):
         self.font = customtkinter.CTkFont(family="Roboto", size=15, weight="bold")
         self.character_name = character_name
         self.character = characters
-        cleaned_names = [characters.replace('"','') for characters in characters]
+        cleaned_names = [char.replace('"','') for char in characters]
         self.character_images = ie.extract_images(f"./Info/assets/Character assets/{character_name}",cleaned_names)
         self.icons = ie.other_images(f"./Info/assets/icons/")
         self.save_state = ssm.check_character_state(character_name,save_file_name)
@@ -98,45 +99,12 @@ class FunctionalGrid(customtkinter.CTkScrollableFrame):
             
             self.labels.append(char_label)
 
-#Main menu frame that allows for changing between the killers and survivors
-
-class MainMenu(customtkinter.CTkFrame):
-    def __init__(self, master):
-        super().__init__(master)
-        killerbutton = customtkinter.CTkButton(self, text="killers", command= lambda: master.switch_window(MakeAndChooseSaves(master,char_type="Killers")))
-        survivorbutton = customtkinter.CTkButton(self, text="survivors", command= lambda: master.switch_window(MakeAndChooseSaves(master,char_type="Survivors")))
-
-        killerbutton.grid(row=1,column=1, padx= 10, pady= (0,10))
-        survivorbutton.grid(row=1,column=2, padx= 10, pady= (0,10))
 
 class MakeAndChooseSaves(customtkinter.CTkFrame):
     def __init__(self, master, char_type:str):
         super().__init__(master)
 
         self.row = 1
-
-        def create_savefile():
-            save_name = self.create_text.get()
-            ssm.save_file_creation(char_type,save_name=save_name)
-            if char_type == "Killers": 
-                save_button = customtkinter.CTkButton(self, 
-                                                    text=f"{save_name}",
-                                                    command= lambda save=save_name, : master.switch_window(FunctionalGrid(master, 
-                                                                                                        characters=ce.killer_list(), 
-                                                                                                        character_name=char_type,
-                                                                                                        save_file_name= save)))
-            elif char_type == "Survivors" : 
-                save_button = customtkinter.CTkButton(self, 
-                                                    text=f"{save_name}",
-                                                    command= lambda save=save_name, : master.switch_window(FunctionalGrid(master, 
-                                                                                                        characters=ce.survivor_list(), 
-                                                                                                        character_name=char_type,
-                                                                                                        save_file_name= save)))   
-            save_button.grid(row=self.row,column=0,padx= 10, pady= (10,10),sticky="ew")
-
-            self.row += 1
-
-
         self.grid_columnconfigure(0, weight=1)
         self.save_path = f"./Saves/{char_type}"
 
@@ -151,22 +119,19 @@ class MakeAndChooseSaves(customtkinter.CTkFrame):
             if char_type == "Killers": 
                 save_button = customtkinter.CTkButton(self, 
                                                     text=f"{save_name}",
-                                                    command= lambda save=save_name, : master.switch_window(FunctionalGrid(master, 
+                                                    command= lambda save=save_name, : bf.switch_window(master,FunctionalGrid(master, 
                                                                                                         characters=ce.killer_list(), 
                                                                                                         character_name=char_type,
                                                                                                         save_file_name= save)))
             elif char_type == "Survivors" : 
                 save_button = customtkinter.CTkButton(self, 
                                                     text=f"{save_name}",
-                                                    command= lambda save=save_name, : master.switch_window(FunctionalGrid(master, 
+                                                    command= lambda save=save_name, : bf.switch_window(master,FunctionalGrid(master, 
                                                                                                         characters=ce.survivor_list(), 
                                                                                                         character_name=char_type,
                                                                                                         save_file_name= save)))                
             save_button.grid(row=self.row,column=0,padx= 10, pady= (10,10),sticky="ew")
             self.row += 1
-
-
-
 
 
         self.controls_frame = customtkinter.CTkFrame(self)
@@ -176,18 +141,37 @@ class MakeAndChooseSaves(customtkinter.CTkFrame):
         self.controls_frame.grid_columnconfigure(2, weight=0)
 
         self.create_text = customtkinter.CTkEntry(self.controls_frame, placeholder_text="this is where you put your save file name")
-        self.create_button = customtkinter.CTkButton(self.controls_frame, text="Create Save file", command= lambda: create_savefile())
+        self.create_button = customtkinter.CTkButton(self.controls_frame, text="Create Save file", command= lambda: bf.create_savefile(master, self, char_type))
 
         self.create_text.grid(row=0, columnspan=2, padx=10, pady=10, sticky="ew")
         self.create_button.grid(row=0, column=2, padx=10, pady=10, sticky="ew")
 
 
+
+#Main menu frame that allows for changing between the killers and survivors
+
+class MainMenu(customtkinter.CTkFrame):
+    def __init__(self, master):
+        super().__init__(master)
+        killerbutton = customtkinter.CTkButton(self, text="killers", command= lambda: bf.switch_window(master,MakeAndChooseSaves(master,char_type="Killers")))
+        survivorbutton = customtkinter.CTkButton(self, text="survivors", command= lambda: bf.switch_window(master,MakeAndChooseSaves(master,char_type="Survivors")))
+        updatebutton = customtkinter.CTkButton(self, text="update", command= lambda: uf.check_for_updates(master, version=master.version))
+
+
+        killerbutton.grid(row=1,column=1, padx= 10, pady= (0,10))
+        survivorbutton.grid(row=1,column=2, padx= 10, pady= (0,10))
+        updatebutton.grid(row=1, column=3, padx= 10, pady= (0,10))
+
+
+
+
 #Main Window class 
 
 class MainApp(customtkinter.CTk):
-    def __init__(self):
+    def __init__(self, app_version):
         super().__init__()
-        self.title("Main Menu")
+        self.version = app_version
+        self.title(f"DBD-Challenge-Tracking-App - V-{self.version}")
         self.geometry("900x500")
         self.grid_rowconfigure(0, weight=1)
         self.grid_columnconfigure(0, weight=1)
@@ -195,16 +179,12 @@ class MainApp(customtkinter.CTk):
         self.funcgrid = MainMenu(self) 
         self.funcgrid.grid(row= 0, column= 0, padx= 0, pady= (10,0), sticky="nsew")
 
+        version_label = customtkinter.CTkLabel(
+            self,
+            text=f"Version {self.version}",
+            font=("Arial", 10),
+            anchor="e"
+        )
+        version_label.grid(row=1, column=0, sticky="se", padx=10, pady=10)
 
-    def switch_window(self, frame_class):
-
-
-        if self.funcgrid is not None:
-            self.funcgrid.destroy()
-        self.funcgrid = frame_class
-        self.funcgrid.grid(row= 0, column= 0, padx= 0, pady= (10,0), sticky="nsew")
-
-
-app = MainApp()
-
-app.mainloop()
+        self.toplevel_window = None
