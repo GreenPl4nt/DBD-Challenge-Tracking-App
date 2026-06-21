@@ -179,14 +179,19 @@ class MainApp(customtkinter.CTk):
         self.grid_columnconfigure(0, weight=1)
 
         self.funcgrid = MainMenu(self) 
-        self.funcgrid.grid(row= 0, column= 0, padx= 0, pady= (10,0), sticky="nsew")
-
+        self.funcgrid.grid(row= 0, column= 0, columnspan=2, padx= 0, pady= (10,0), sticky="nsew")
+        madeby_label = customtkinter.CTkLabel(
+            self,
+            text = "Made by GreenPlant",
+            font = ("Arial", 10),
+        )
         version_label = customtkinter.CTkLabel(
             self,
             text=f"Version {self.version}",
             font=("Arial", 10),
             anchor="e"
         )
-        version_label.grid(row=1, column=0, sticky="se", padx=10, pady=10)
+        madeby_label.grid(row=1, column=0, sticky="sw", padx= 10, pady= 10)
+        version_label.grid(row=1, column=1, sticky="se", padx=10, pady=10)
 
         self.toplevel_window = None
