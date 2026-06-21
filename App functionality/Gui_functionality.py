@@ -183,13 +183,13 @@ class MainApp(customtkinter.CTk):
         madeby_label = customtkinter.CTkLabel(
             self,
             text = "Made by GreenPlant",
-            font = ("Arial", 10),
+            font = ("Arial", 10, "bold"),
         )
         version_label = customtkinter.CTkLabel(
             self,
             text=f"Version {self.version}",
-            font=("Arial", 10),
-            anchor="e"
+            font=("Arial", 10, "bold"),
+            anchor="e",
         )
         madeby_label.grid(row=1, column=0, sticky="sw", padx= 10, pady= 10)
         version_label.grid(row=1, column=1, sticky="se", padx=10, pady=10)

@@ -46,7 +46,7 @@ class update_checker(customtkinter.CTkToplevel):
                                                                                                             args=(self,self.data), 
                                                                                                             daemon=True
                                                                                                             ).start())
-            self.updatebutton.grid(row=2, column=1, padx=10 , pady=10)
+            self.updatebutton.grid(row=1, column=0, padx=10 , pady=10)
 
 
         self.label.grid(row= 0, column= 0, columnspan=2, sticky="ew")
