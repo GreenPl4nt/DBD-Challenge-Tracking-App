@@ -43,7 +43,7 @@ class update_checker(customtkinter.CTkToplevel):
             self.label = customtkinter.CTkLabel(self,text="A new update was found, press Ok to update")
             self.updatebutton = customtkinter.CTkButton(self, text="Ok", command= lambda: threading.Thread(
                                                                                                             target=cause_download, 
-                                                                                                            data=(self,self.data), 
+                                                                                                            args=(self,self.data), 
                                                                                                             daemon=True
                                                                                                             ).start())
             self.updatebutton.grid(row=2, column=1, padx=10 , pady=10)
