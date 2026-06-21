@@ -99,6 +99,8 @@ class FunctionalGrid(customtkinter.CTkScrollableFrame):
             
             self.labels.append(char_label)
 
+#Window functionality to make and/or choose which save to use
+#TODO: Make a pop up to choose which gamemode to make the save
 
 class MakeAndChooseSaves(customtkinter.CTkFrame):
     def __init__(self, master, char_type:str):

@@ -20,12 +20,12 @@ class update_checker(customtkinter.CTkToplevel):
         self.geometry("300x100")
 
         self.grid_rowconfigure(0, weight=1)
-        self.grid_columnconfigure(0, weight=1)
+        self.grid_columnconfigure(0, weight=2)
 
         self.data = data
 
         self.closebutton = customtkinter.CTkButton(self, text= "Close", command= lambda: close_pop_up(master))
-        self.closebutton.grid(row=2, column= 2)
+        self.closebutton.grid(row=1, column= 1, padx=10 , pady=10)
 
         # State is 0 means not being able to check an update
         if state == 0:
@@ -46,10 +46,10 @@ class update_checker(customtkinter.CTkToplevel):
                                                                                                             data=(self,self.data), 
                                                                                                             daemon=True
                                                                                                             ).start())
-            self.updatebutton.grid(row=2, column=1)
+            self.updatebutton.grid(row=2, column=1, padx=10 , pady=10)
 
-        self.label.configure(anchor="center", justify="center")
-        self.label.grid(row= 0, column= 0, padx=20, pady=20, sticky="ew")
+
+        self.label.grid(row= 0, column= 0, columnspan=2, sticky="ew")
 
 
 def open_top_level(master,state,data = None):
