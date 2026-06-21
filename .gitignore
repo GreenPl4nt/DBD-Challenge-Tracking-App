@@ -15,5 +15,3 @@ dist/
 # IDE folders (optional)
 .vscode/
 .idea/
-
-requirements.txt
