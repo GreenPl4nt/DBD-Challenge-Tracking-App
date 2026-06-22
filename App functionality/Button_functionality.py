@@ -23,7 +23,7 @@ def switch_window(master, frame_class):
         except:
             pass
     master.funcgrid = frame_class
-    master.funcgrid.grid(row= 0, column= 0, padx= 0, pady= (10,0), sticky="nsew")
+    master.funcgrid.grid(row= 0, column= 0, columnspan= 2, padx= 0, pady= (10,0), sticky="nsew")
     master.update_idletasks()
 
 

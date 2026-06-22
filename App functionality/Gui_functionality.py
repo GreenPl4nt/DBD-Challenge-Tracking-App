@@ -5,6 +5,9 @@ import Save_state_manipulation as ssm
 import button_functionality as bf
 import Update_functionality as uf
 from pathlib import Path
+import os
+
+appdata_path = os.getenv("LOCALAPPDATA")
 
 #Complete sintetized functionality of frame for Killers and Survivors
 
@@ -108,7 +111,7 @@ class MakeAndChooseSaves(customtkinter.CTkFrame):
 
         self.row = 1
         self.grid_columnconfigure(0, weight=1)
-        self.save_path = f"./Saves/{char_type}"
+        self.save_path = Path(appdata_path) / "DBD Challenge Tracking App" / "Saves" / char_type
 
         dir_path = Path(self.save_path)
         files_list = [i for i in dir_path.iterdir() if i.is_file()]
@@ -116,8 +119,7 @@ class MakeAndChooseSaves(customtkinter.CTkFrame):
         for i in files_list:
 
             self.grid_rowconfigure(self.row, weight=1)
-            save_name = str(i).replace(f"Saves\\{char_type}\\","")
-            save_name = save_name.replace(".json","")
+            save_name = Path(f"{self.save_path}/{i}").stem
             if char_type == "Killers": 
                 save_button = customtkinter.CTkButton(self, 
                                                     text=f"{save_name}",
