@@ -21,7 +21,7 @@ class FunctionalGrid(customtkinter.CTkScrollableFrame):
         self.character = characters
         cleaned_names = [char.replace('"','') for char in characters]
         self.character_images = ie.extract_images(f"./Info/assets/Character assets/{character_name}",cleaned_names)
-        self.icons = ie.other_images(f"./Info/assets/icons/")
+        self.icons = ie.other_images()
         self.save_state = ssm.check_character_state(character_name,save_file_name)
         self.labels = []
         self.buttons_dict = {}
@@ -157,14 +157,28 @@ class MakeAndChooseSaves(customtkinter.CTkFrame):
 class MainMenu(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
-        killerbutton = customtkinter.CTkButton(self, text="killers", command= lambda: bf.switch_window(master,MakeAndChooseSaves(master,char_type="Killers")))
-        survivorbutton = customtkinter.CTkButton(self, text="survivors", command= lambda: bf.switch_window(master,MakeAndChooseSaves(master,char_type="Survivors")))
-        updatebutton = customtkinter.CTkButton(self, text="update", command= lambda: uf.check_for_updates(master, version=master.version))
+
+        self.rowconfigure(0, weight=1)
+        self.columnconfigure((0,1,2), weight=1)
+
+        killerbutton = customtkinter.CTkButton(self, 
+                                               text="", 
+                                               image= ie.other_images()["killers_icon"],
+                                               fg_color="transparent",
+                                               command= lambda: bf.switch_window(master,MakeAndChooseSaves(master,char_type="Killers")))
+        survivorbutton = customtkinter.CTkButton(self, text="", 
+                                                 image= ie.other_images()["survivors_icon"],
+                                                 fg_color="transparent",
+                                                 command= lambda: bf.switch_window(master,MakeAndChooseSaves(master,char_type="Survivors")))
+        updatebutton = customtkinter.CTkButton(self, text="", 
+                                               image= ie.other_images()["update_icon"],
+                                               fg_color="transparent",
+                                               command= lambda: uf.check_for_updates(master, version=master.version))
 
 
-        killerbutton.grid(row=1,column=1, padx= 10, pady= (0,10))
-        survivorbutton.grid(row=1,column=2, padx= 10, pady= (0,10))
-        updatebutton.grid(row=1, column=3, padx= 10, pady= (0,10))
+        killerbutton.grid(row=0,column=0, padx= 10, pady= (0,10))
+        survivorbutton.grid(row=0,column=1, padx= 10, pady= (0,10))
+        updatebutton.grid(row=0, column=2, padx= 10, pady= (0,10))
 
 
 

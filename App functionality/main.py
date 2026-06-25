@@ -3,7 +3,7 @@ from pathlib import Path
 import shutil
 import os
 
-APP_VERSION = "v1.1.0"
+APP_VERSION = "v1.1.1"
 
 appdata_path = os.getenv("LOCALAPPDATA") 
 appdata_path = Path(appdata_path) / "DBD Challenge Tracking App" / "Saves"

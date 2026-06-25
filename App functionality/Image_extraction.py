@@ -3,8 +3,9 @@ from PIL import Image
 
 #Creates an image, might make it so that the images scale with the window size
 
-def other_images(path:str):
-     icons = ["dead survivor"]
+def other_images():
+     path = f"./Info/assets/icons/"
+     icons = ["dead survivor", "killers_icon" , "survivors_icon", "update_icon"]
      img_dict = {}
      for i in icons:
           image = customtkinter.CTkImage(light_image= Image.open(f"{path}/{i}.png"),
